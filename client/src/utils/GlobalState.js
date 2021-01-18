@@ -4,9 +4,12 @@ import { useProductReducer } from './reducers';
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
+//will list initial state in key:prop list
 const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useProductReducer({
       products: [],
+      cart: [],
+      cartOpen: false,
       categories: [],
       currentCategory: '',
     });
