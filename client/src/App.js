@@ -9,6 +9,7 @@ import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
+import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from "./pages/OrderHistory";
 
 const client = new ApolloClient({
@@ -22,12 +23,13 @@ const client = new ApolloClient({
   },
   uri: '/graphql',
 })
-
+//apollo provider enables db/graphql access to components, storeprovider enables state to be available to all components
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
+          <StoreProvider>
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
@@ -37,6 +39,7 @@ function App() {
             <Route exact path="/products/:id" component={Detail} />
             <Route component={NoMatch} />
           </Switch>
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
